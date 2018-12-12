@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace PongConsole_Heras
 {
-    class Program
+    class Ball
     {
-        static void Main(string[] args)
-        {
-            new Game().Run();
-            Console.ReadLine();
-        }
+        char character;
+        ConsoleColor color;
+        Vector2D fieldSize;
+        Vector2D positionNew;
+        
     }
 }
