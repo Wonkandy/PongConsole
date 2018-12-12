@@ -1,0 +1,7 @@
+C:\Users\Solidify\Documents\PongConsole_Heras\PongConsole_Heras\bin\Debug\PongConsole_Heras.exe.config
+C:\Users\Solidify\Documents\PongConsole_Heras\PongConsole_Heras\bin\Debug\PongConsole_Heras.exe
+C:\Users\Solidify\Documents\PongConsole_Heras\PongConsole_Heras\bin\Debug\PongConsole_Heras.pdb
+C:\Users\Solidify\Documents\PongConsole_Heras\PongConsole_Heras\obj\Debug\PongConsole_Heras.csprojAssemblyReference.cache
+C:\Users\Solidify\Documents\PongConsole_Heras\PongConsole_Heras\obj\Debug\PongConsole_Heras.csproj.CoreCompileInputs.cache
+C:\Users\Solidify\Documents\PongConsole_Heras\PongConsole_Heras\obj\Debug\PongConsole_Heras.exe
+C:\Users\Solidify\Documents\PongConsole_Heras\PongConsole_Heras\obj\Debug\PongConsole_Heras.pdb
