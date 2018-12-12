@@ -12,13 +12,20 @@ namespace PongConsole_Heras
         private Vector2D fieldSize = new Vector2D(80, 25);
         private ConsoleColor fieldForeColor = ConsoleColor.Green;
         private ConsoleColor fieldBackColor = ConsoleColor.Black;
+
         private int loopTime = 90;
+        private Ball ball;
+        private char ballCharacter = '■';
+        private ConsoleColor ballColor = ConsoleColor.Green;
 
         //Konstruktor
         public Game()
         {
             //Spielfeld zeichnen
             Field.Draw(fieldSize, fieldForeColor, fieldBackColor);
+            // Ball instanziieren: 
+            ball = new Ball(ballCharacter, ballColor, fieldSize);
+            
         }
 
         public void Run()
@@ -39,6 +46,11 @@ namespace PongConsole_Heras
                 if (ms > loopTime)
                 {
                     t0 = t1;
+                    ball.Update();
+                    Field.DrawCenterLine();
+                    ball.Draw();
+
+
                     /*Field.DrawCenterLine();
                     Console.SetCursorPosition(x, y);
                     Console.Write(" ");
