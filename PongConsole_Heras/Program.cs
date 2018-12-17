@@ -10,6 +10,7 @@ namespace PongConsole_Heras
     {
         static void Main(string[] args)
         {
+            //Console.SetWindowSize(100, 50);
             new Game().Run();
             Console.ReadLine();
         }

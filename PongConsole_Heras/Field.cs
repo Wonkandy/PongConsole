@@ -25,14 +25,18 @@ namespace PongConsole_Heras
         {
             int width = Console.WindowWidth / 2;
             int height = Console.WindowHeight;
-            for (int j = 0; j < height; j++)
+            
+            for (int i = 0; i < height; i++)
             {
-                for (int i = 0; i < width; i++)
+                if (i % 2 == 0)
                 {
-                    Console.Write(" ");
+                    Console.SetCursorPosition(width, i);
+                    Console.Write("|");
                 }
-                Console.WriteLine("|");
+                
             }
+
+
             
         }
 
