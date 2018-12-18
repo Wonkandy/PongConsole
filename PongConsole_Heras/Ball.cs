@@ -32,7 +32,7 @@ namespace PongConsole_Heras
         }
 
         // Aktualisierung der Position:
-        public void Update()
+        public void Update(Paddle paddleLeft)
         {
             positionNew = positionOld + velocity;
             // Kollision mit Spielfeldrändern:

@@ -17,7 +17,14 @@ namespace PongConsole_Heras
         private Ball ball;
         private char ballCharacter = '■';
         private ConsoleColor ballColor = ConsoleColor.Green;
-
+        private char paddleCharacter = '█';
+        private int paddleSize = 4;
+        private int paddleSpeed = 1;
+        private int paddleOffset = 6;
+        private Paddle paddleLeft;
+        private Paddle paddleRight;
+        private ConsoleColor paddleLeftColor = ConsoleColor.Green;
+        
         //Konstruktor
         public Game()
         {
@@ -25,7 +32,9 @@ namespace PongConsole_Heras
             Field.Draw(fieldSize, fieldForeColor, fieldBackColor);
             // Ball instanziieren: 
             ball = new Ball(ballCharacter, ballColor, fieldSize);
-            
+            paddleLeft = new Paddle(paddleCharacter, paddleSize, paddleLeftColor, new Vector2D(paddleOffset - 1, (fieldSize.Y - paddleSize) / 2), paddleSpeed, fieldSize);
+            paddleRight = new Paddle(paddleCharacter, paddleSize, paddleLeftColor, new Vector2D(fieldSize.X - paddleOffset, (fieldSize.Y - paddleSize) / 2), paddleSpeed, fieldSize);
+
         }
 
         public void Run()
@@ -46,9 +55,13 @@ namespace PongConsole_Heras
                 if (ms > loopTime)
                 {
                     t0 = t1;
-                    ball.Update();
+                    UserInput.GetKeyState(paddleLeft);
+                    UserInput.GetKeyStateR(paddleRight);
+                    ball.Update(paddleLeft);
                     Field.DrawCenterLine();
                     ball.Draw();
+                    paddleLeft.Draw();
+                    paddleRight.Draw();
 
 
                     /*Field.DrawCenterLine();
