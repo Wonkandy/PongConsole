@@ -57,7 +57,33 @@ namespace PongConsole_Heras
             {
                 positionNew.Y = fieldSize.Y - 2; positionNew.X = fieldSize.X - 2;
                 velocity.X *= -1; velocity.Y *= -1;
-            }       
+            }
+            // Kollision mit paddleLeft
+            if (positionNew.X <= paddleLeft.Position.X + 1 &&
+                positionNew.X >= paddleLeft.Position.X + velocity.X + 2 && 
+                positionNew.Y >= paddleLeft.Position.Y && 
+                positionNew.Y < paddleLeft.Position.Y + paddleLeft.Size)
+            {
+                if (positionNew.Y < paddleLeft.Position.Y + paddleLeft.Size / 3)
+                {
+                    velocity.X = 4;
+                    velocity.Y = -1;
+                }
+                else
+                    if (positionNew.Y < paddleLeft.Position.Y + 2 * paddleLeft.Size / 3)
+                    {
+                        velocity.X = 4;
+                        velocity.Y = 0;
+                    }
+                
+                else
+	            {
+                    velocity.X = 4;
+                    velocity.Y = 1;
+                }
+                positionNew.X = paddleLeft.Position.X + 1;
+                //velocity.X = -1;
+            }
         }
 
         //Konsolenausgabe
