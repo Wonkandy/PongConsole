@@ -20,7 +20,8 @@ namespace PongConsole_Heras
                     paddleLeft.Update("up");
                 if (GetAsyncKeyState((int)ConsoleKey.S) != 0)
                     paddleLeft.Update("down");
-
+                if (GetAsyncKeyState((int)ConsoleKey.Escape) != 0)
+                    return false;
             }
             return true;
         }

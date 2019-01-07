@@ -24,7 +24,12 @@ namespace PongConsole_Heras
         private Paddle paddleLeft;
         private Paddle paddleRight;
         private ConsoleColor paddleLeftColor = ConsoleColor.Green;
-        
+        private ConsoleColor paddleRightColor = ConsoleColor.Green;
+        private int playerLeftScore = 0;
+        private int playerRightScore = 0;
+        private int newBallDelay = 1500;
+        private bool rungameLoop = true;
+
         //Konstruktor
         public Game()
         {
@@ -45,23 +50,30 @@ namespace PongConsole_Heras
             Console.Write("■");*/
 
             DateTime t0, t1;
+            Vector2D ballPosition;
+            GameStartScreen();
             t0 = DateTime.Now;
-
+                      
             //Game Loop:
-            while (true)
+            while (rungameLoop)
             {
                 t1 = DateTime.Now;
                 int ms = (t1.Millisecond - t0.Millisecond + 1000) % 1000;
                 if (ms > loopTime)
                 {
                     t0 = t1;
+                    rungameLoop = UserInput.GetKeyState(paddleLeft);
                     UserInput.GetKeyState(paddleLeft);
                     UserInput.GetKeyStateR(paddleRight);
-                    ball.Update(paddleLeft);
+                    ball.Update(paddleLeft, paddleRight);
                     Field.DrawCenterLine();
-                    ball.Draw();
+                    DrawScores();
+                    ballPosition = ball.Draw();
+                    if (ballPosition.X == 0) { playerRightScore++; NewBall(); }
+                    if (ballPosition.X == fieldSize.X -1) { playerLeftScore++; NewBall(); }
                     paddleLeft.Draw();
                     paddleRight.Draw();
+                   
 
 
                     /*Field.DrawCenterLine();
@@ -72,6 +84,52 @@ namespace PongConsole_Heras
                     Console.Write("■");*/
                 }
             }
+            GameEndScreen();
+        }
+
+        public void DrawScores()
+        {
+            ConsoleColor foregroundColor = Console.ForegroundColor;
+            Console.ForegroundColor = paddleLeftColor;
+            Console.SetCursorPosition(paddleOffset - 1 + (fieldSize.X / 2 - paddleOffset) / 2, 1);
+            Console.Write(playerLeftScore);
+            Console.ForegroundColor = paddleRightColor;
+            Console.SetCursorPosition(fieldSize.X / 2 + (fieldSize.X / 2 - paddleOffset) / 2, 1);
+            Console.Write(playerRightScore);
+            Console.ForegroundColor = foregroundColor;
+        }
+
+        private void NewBall()
+        {
+            ball.Color = ConsoleColor.Red;
+            ball.Draw();
+            ball.Color = ballColor;
+            System.Threading.Thread.Sleep(newBallDelay);
+            DrawScores();
+            paddleLeft.Reset();
+            paddleLeft.Draw();
+            paddleRight.Reset();
+            paddleRight.Draw();
+            ball.Reset();
+            ball.Draw();
+            System.Threading.Thread.Sleep(newBallDelay);
+        }
+
+        private void GameEndScreen()
+        {
+            
+            Console.Clear();
+            for (int i = 0; i < 15; i++)
+            {
+                Console.WriteLine("VERLOREN HAHA");
+            }
+            
+        }
+
+        private void GameStartScreen()
+        {
+            Console.Write("Pong by Max Heras");
+            Console.ReadLine();
         }
     }
 }

@@ -45,7 +45,7 @@ namespace PongConsole_Heras
                     break;
                 case "down":
                     positionNew = new Vector2D(positionOld.X, positionOld.Y + speed);
-                    if (positionNew.Y > fieldSize.Y) positionNew.Y = fieldSize.Y - size;
+                    if (positionNew.Y > (fieldSize.Y -size)) positionNew.Y = fieldSize.Y - size;
                     break;
             }
         }
@@ -66,6 +66,11 @@ namespace PongConsole_Heras
             }
             Console.ForegroundColor = foregroundColor;
             positionOld = positionNew;
+        }
+
+        public void Reset()
+        {
+            positionNew = positionStart;
         }
 
     }
