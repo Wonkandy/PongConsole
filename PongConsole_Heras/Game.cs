@@ -9,22 +9,22 @@ namespace PongConsole_Heras
     class Game
     {
         private Vector2D fieldSize = new Vector2D(80, 25);
-        private ConsoleColor foreColor = ConsoleColor.White;
-        private ConsoleColor backColor = ConsoleColor.Black;
+        private ConsoleColor foreColor = ConsoleColor.Black;
+        private ConsoleColor backColor = ConsoleColor.White;
         private int loopTime = 90;
 
         private Ball ball;
         private char ballCharacter = '■';
-        private ConsoleColor ballColor = ConsoleColor.White;
+        private ConsoleColor ballColor = ConsoleColor.Black;
 
         private char paddleCharacter = '█';
         private int paddleSize = 4, paddleSpeed = 1, paddleOffset = 6;
 
         private Paddle paddleLeft;
-        private ConsoleColor paddleLeftColor = ConsoleColor.White;
+        private ConsoleColor paddleLeftColor = ConsoleColor.Black;
 
         private Paddle paddleRight;
-        private ConsoleColor paddleRightColor = ConsoleColor.White;
+        private ConsoleColor paddleRightColor = ConsoleColor.Black;
 
         private int playerLeftScore = 0, playerRightScore = 0;
 
@@ -110,10 +110,35 @@ namespace PongConsole_Heras
         private void GameEndScreen()
         {
             Console.Clear();
-            Console.SetCursorPosition(fieldSize.X / 2 - 5, fieldSize.Y / 2);
-            Console.Write("Game Ended");
+            Console.SetCursorPosition(fieldSize.X / 2 - 7, fieldSize.Y / 2);
+            Console.Write("Game Ended\n");
             Console.SetCursorPosition(fieldSize.X / 2 - 5, fieldSize.Y / 2 + 1);
-            Console.Write(playerLeftScore + " : " + playerRightScore);
+            Console.Write(playerLeftScore + " : " + playerRightScore + "\n");
+            if (playerLeftScore < playerRightScore)
+            {
+                Console.SetCursorPosition(fieldSize.X / 2 - 10, fieldSize.Y / 2 + 2);
+                Console.Write("Right Player Won!");
+            }
+            if (playerLeftScore > playerRightScore)
+            {
+                Console.SetCursorPosition(fieldSize.X / 2 - 10, fieldSize.Y / 2 + 2);
+                Console.Write("Left Player Won!");
+
+            }
+            if (playerLeftScore == playerRightScore)
+            {
+                Console.SetCursorPosition(fieldSize.X / 2 - 5, fieldSize.Y / 2 + 2);
+                Console.Write("Draw!\n");
+                Console.SetCursorPosition(fieldSize.X / 2 - 10, fieldSize.Y / 2 + 3);
+
+                Console.Write("Play a Rematch!");
+
+            }
+            Console.SetCursorPosition(fieldSize.X / 2 - 11, fieldSize.Y / 2 + 6);
+            Console.Write("A Game By Max Heras");
+            Console.SetCursorPosition(fieldSize.X / 2 - 16, fieldSize.Y / 2 + 7);
+            Console.Write("github.com/Wonkandy/PongConsole");
+            Console.Read();
         }
 
         private void GameStartScreen()
