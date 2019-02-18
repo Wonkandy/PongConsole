@@ -21,3 +21,5 @@ C:\Users\Max Heras\Documents\Pong\PongConsole\PongConsole_Heras\obj\Debug\PongCo
 C:\Users\Max Heras\Documents\Pong\PongConsole\PongConsole_Heras\obj\Debug\PongConsole_Heras.pdb
 C:\Users\Max Heras\Documents\Pong\PongConsole\PongConsole_Heras\obj\Debug\PongConsole_Heras.Resource1.resources
 C:\Users\Max Heras\Documents\Pong\PongConsole\PongConsole_Heras\obj\Debug\PongConsole_Heras.csproj.GenerateResource.cache
+C:\Users\Solidify\Documents\PongConsole_Heras\PongConsole_Heras\obj\Debug\PongConsole_Heras.Resource1.resources
+C:\Users\Solidify\Documents\PongConsole_Heras\PongConsole_Heras\obj\Debug\PongConsole_Heras.csproj.GenerateResource.cache

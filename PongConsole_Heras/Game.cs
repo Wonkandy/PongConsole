@@ -8,80 +8,72 @@ namespace PongConsole_Heras
 {
     class Game
     {
-        //Felder
         private Vector2D fieldSize = new Vector2D(80, 25);
-        private ConsoleColor fieldForeColor = ConsoleColor.Green;
-        private ConsoleColor fieldBackColor = ConsoleColor.Black;
-
+        private ConsoleColor foreColor = ConsoleColor.White;
+        private ConsoleColor backColor = ConsoleColor.Black;
         private int loopTime = 90;
+
         private Ball ball;
         private char ballCharacter = '■';
-        private ConsoleColor ballColor = ConsoleColor.Green;
-        private char paddleCharacter = '█';
-        private int paddleSize = 4;
-        private int paddleSpeed = 1;
-        private int paddleOffset = 6;
-        private Paddle paddleLeft;
-        private Paddle paddleRight;
-        private ConsoleColor paddleLeftColor = ConsoleColor.Green;
-        private ConsoleColor paddleRightColor = ConsoleColor.Green;
-        private int playerLeftScore = 0;
-        private int playerRightScore = 0;
-        private int newBallDelay = 1500;
-        private bool rungameLoop = true;
+        private ConsoleColor ballColor = ConsoleColor.White;
 
-        //Konstruktor
+        private char paddleCharacter = '█';
+        private int paddleSize = 4, paddleSpeed = 1, paddleOffset = 6;
+
+        private Paddle paddleLeft;
+        private ConsoleColor paddleLeftColor = ConsoleColor.White;
+
+        private Paddle paddleRight;
+        private ConsoleColor paddleRightColor = ConsoleColor.White;
+
+        private int playerLeftScore = 0, playerRightScore = 0;
+
+        private int newBallDelay = 1500;
+
+        private bool runGameLoop = true;
+
         public Game()
         {
-            //Spielfeld zeichnen
-            Field.Draw(fieldSize, fieldForeColor, fieldBackColor);
-            // Ball instanziieren: 
+            Field.Draw(fieldSize, foreColor, backColor);
             ball = new Ball(ballCharacter, ballColor, fieldSize);
-            paddleLeft = new Paddle(paddleCharacter, paddleSize, paddleLeftColor, new Vector2D(paddleOffset - 1, (fieldSize.Y - paddleSize) / 2), paddleSpeed, fieldSize);
-            paddleRight = new Paddle(paddleCharacter, paddleSize, paddleLeftColor, new Vector2D(fieldSize.X - paddleOffset, (fieldSize.Y - paddleSize) / 2), paddleSpeed, fieldSize);
 
+            paddleLeft = new Paddle(paddleCharacter, paddleLeftColor, fieldSize, new Vector2D(paddleOffset - 1, (fieldSize.Y - paddleSize) / 2), paddleSize, paddleSpeed);
+            paddleRight = new Paddle(paddleCharacter, paddleRightColor, fieldSize, new Vector2D(fieldSize.X - paddleOffset, (fieldSize.Y - paddleSize) / 2), paddleSize, paddleSpeed);
         }
 
         public void Run()
         {
-            /*int x = Console.WindowWidth / 2;
-            int y = 0;
-            Console.SetCursorPosition(x, y);
-            Console.Write("■");*/
-
-            DateTime t0, t1;
+            DateTime t0 = DateTime.Now, t1;
             Vector2D ballPosition;
             GameStartScreen();
-            t0 = DateTime.Now;
-                      
-            //Game Loop:
-            while (rungameLoop)
+            while (runGameLoop)
             {
                 t1 = DateTime.Now;
                 int ms = (t1.Millisecond - t0.Millisecond + 1000) % 1000;
                 if (ms > loopTime)
                 {
                     t0 = t1;
-                    rungameLoop = UserInput.GetKeyState(paddleLeft);
-                    UserInput.GetKeyState(paddleLeft);
-                    UserInput.GetKeyStateR(paddleRight);
-                    ball.Update(paddleLeft, paddleRight);
+                    runGameLoop = UserInput.GetKeyState(paddleLeft, paddleRight);
+
                     Field.DrawCenterLine();
                     DrawScores();
+
+                    ball.Update(paddleLeft, paddleRight);
                     ballPosition = ball.Draw();
-                    if (ballPosition.X == 0) { playerRightScore++; NewBall(); }
-                    if (ballPosition.X == fieldSize.X -1) { playerLeftScore++; NewBall(); }
+
+                    if (ballPosition.X == 0)
+                    {
+                        playerRightScore++;
+                        NewBall();
+                    }
+                    if (ballPosition.X == fieldSize.X - 1)
+                    {
+                        playerLeftScore++;
+                        NewBall();
+                    }
+
                     paddleLeft.Draw();
                     paddleRight.Draw();
-                   
-
-
-                    /*Field.DrawCenterLine();
-                    Console.SetCursorPosition(x, y);
-                    Console.Write(" ");
-                    if (y < Console.WindowHeight - 1) y++;
-                    Console.SetCursorPosition(x, y);
-                    Console.Write("■");*/
                 }
             }
             GameEndScreen();
@@ -117,19 +109,24 @@ namespace PongConsole_Heras
 
         private void GameEndScreen()
         {
-            
             Console.Clear();
-            for (int i = 0; i < 15; i++)
-            {
-                Console.WriteLine("VERLOREN HAHA");
-            }
-            
+            Console.SetCursorPosition(fieldSize.X / 2 - 5, fieldSize.Y / 2);
+            Console.Write("Game Ended");
+            Console.SetCursorPosition(fieldSize.X / 2 - 5, fieldSize.Y / 2 + 1);
+            Console.Write(playerLeftScore + " : " + playerRightScore);
         }
 
         private void GameStartScreen()
         {
-            Console.Write("Pong by Max Heras");
-            Console.ReadLine();
+            Console.Clear();
+            Console.SetCursorPosition(fieldSize.X / 2 - 6, fieldSize.Y / 2);
+            Console.Write("Console Pong");
+            Console.SetCursorPosition(fieldSize.X / 2 - 8, fieldSize.Y / 2 + 1);
+            Console.Write("Maximilian Heras");
+            Console.SetCursorPosition(fieldSize.X / 2 - 10, fieldSize.Y / 2 + 2);
+            Console.Write("Press Enter to start");
+            Console.Read();
+            Console.Clear();
         }
     }
 }

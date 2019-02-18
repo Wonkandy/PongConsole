@@ -8,38 +8,33 @@ namespace PongConsole_Heras
 {
     static class Field
     {
-        public static void Draw(Vector2D size, ConsoleColor foreColor, ConsoleColor backColor)
+
+        public static void Draw(Vector2D size, ConsoleColor f, ConsoleColor b)
         {
-            Console.Title = "Console Pong Heras";
+            Console.Title = "Console Pong";
             Console.SetWindowSize(size.X, size.Y);
             Console.SetBufferSize(size.X, size.Y);
-            Console.ForegroundColor = foreColor;
-            Console.BackgroundColor = backColor;
+            Console.ForegroundColor = f;
+            Console.BackgroundColor = b;
             Console.Clear();
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             Console.CursorVisible = false;
+
             DrawCenterLine();
         }
 
+
+
         public static void DrawCenterLine()
         {
-            int width = Console.WindowWidth / 2;
-            int height = Console.WindowHeight;
-            
-            for (int i = 0; i < height; i++)
+            int w = Console.WindowWidth;
+            int h = Console.WindowHeight;
+
+            for (int i = 0; i < h; i += 2)
             {
-                if (i % 2 == 0)
-                {
-                    Console.SetCursorPosition(width, i);
-                    Console.Write("|");
-                }
-                
+                Console.SetCursorPosition(w / 2, i);
+                Console.Write("|");
             }
-
-
-            
         }
-
-
     }
 }

@@ -8,31 +8,39 @@ namespace PongConsole_Heras
 {
     class Paddle
     {
-        //Felder
-        char character;
-        ConsoleColor color;
-        Vector2D fieldSize;
-        Vector2D positionNew;
-        Vector2D positionOld;
-        Vector2D positionStart;
-        private int size;
-        public int Size { get { return size; } }
-        int speed;
+        private char character;
+        private ConsoleColor color;
+        private Vector2D fieldSize, positionNew, positionOld, positionStart;
+        private int size, speed;
 
-        public Vector2D Position { get { return positionNew; } }
+        public int Size
+        {
+            get
+            {
+                return size;
+            }
+        }
+        public Vector2D Position
+        {
+            get
+            {
+                return positionNew;
+            }
+        }
 
-        //Konstruktor & Methoden
-        public Paddle(char character, int size, ConsoleColor color, Vector2D position, int speed, Vector2D fieldSize)
+        public Paddle(char character, ConsoleColor color, Vector2D fieldSize, Vector2D positionStart, int size, int speed)
         {
             this.character = character;
-            if (size < 3) size = 3;
-            this.size = size;
             this.color = color;
-            positionStart = position;
+            this.fieldSize = fieldSize;
+            this.positionStart = positionStart;
+            this.size = size;
+            if (this.size < 3)
+                this.size = 3;
+            this.speed = speed;
+
             positionNew = positionStart;
             positionOld = positionStart;
-            this.speed = speed;
-            this.fieldSize = fieldSize;
         }
 
         public void Update(string move)
@@ -41,11 +49,14 @@ namespace PongConsole_Heras
             {
                 case "up":
                     positionNew = new Vector2D(positionOld.X, positionOld.Y - speed);
-                    if (positionNew.Y < 0) positionNew.Y = 0;
+                    if (positionNew.Y < 0)
+                        positionNew.Y = 0;
                     break;
+
                 case "down":
                     positionNew = new Vector2D(positionOld.X, positionOld.Y + speed);
-                    if (positionNew.Y > (fieldSize.Y -size)) positionNew.Y = fieldSize.Y - size;
+                    if (positionNew.Y > fieldSize.Y - size)
+                        positionNew.Y = fieldSize.Y - size;
                     break;
             }
         }
@@ -72,6 +83,5 @@ namespace PongConsole_Heras
         {
             positionNew = positionStart;
         }
-
     }
 }
