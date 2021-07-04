@@ -8,7 +8,7 @@ namespace PongConsole_Heras
 {
     class Vector2D
     {
-        //Felder
+
         private int x;
         public int X
         {
@@ -23,7 +23,7 @@ namespace PongConsole_Heras
             set { y = value; }
         }
 
-        //Konstruktor
+
         public Vector2D(int x, int y)
         {
             this.x = x;
